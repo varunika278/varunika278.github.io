@@ -38,7 +38,7 @@
 
         .nav-container {
             display: flex;
-            items-center;
+            align-items: center;
             justify-content: space-between;
             height: 64px;
             padding: 0 24px;
@@ -636,9 +636,126 @@
             border: 1px solid #4b5563;
         }
 
-        .project-btn {
+        .learn-more-btn {
+            background: linear-gradient(to right, #2563eb, #9333ea);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             width: 100%;
-            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .learn-more-btn:hover {
+            background: linear-gradient(to right, #1d4ed8, #7c2d12);
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #111827;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #374151;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #374151;
+            color: #ffffff;
+        }
+
+        .modal-body h4 {
+            color: #60a5fa;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+        }
+
+        .modal-body p {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .modal-body li {
+            color: #d1d5db;
+            margin-bottom: 8px;
+        }
+
+        .modal-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .modal-tech-tag {
+            background: #374151;
+            color: #60a5fa;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #4b5563;
         }
 
         /* Expertise Section */
@@ -798,64 +915,6 @@
             font-weight: 500;
         }
 
-        .contact-form {
-            background: rgba(17, 24, 39, 0.5);
-            padding: 32px;
-            border-radius: 16px;
-            border: 1px solid #374151;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            background: #374151;
-            border: 2px solid #4b5563;
-            border-radius: 12px;
-            padding: 16px;
-            font-size: 16px;
-            color: #d1d5db;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #60a5fa;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #9ca3af;
-        }
-
-        .form-group textarea {
-            resize: none;
-            min-height: 120px;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(to right, #2563eb, #9333ea);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-
-        .form-submit:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            transform: scale(1.05);
-        }
-
         /* Animations */
         @keyframes slowPulse {
             0%, 100% { opacity: 1; }
@@ -893,6 +952,16 @@
 
             .timeline-line {
                 left: 16px;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 24px;
+                max-height: 90vh;
+            }
+
+            .modal-title {
+                font-size: 20px;
             }
         }
 
@@ -1097,6 +1166,7 @@
                         <span class="tech-tag">Arduino</span>
                         <span class="tech-tag">Sensors</span>
                     </div>
+                    <button class="learn-more-btn" onclick="openModal('project1Modal')">Learn More</button>
                 </div>
                 <div class="project-card">
                     <h3>Bank Statement Aggregation System</h3>
@@ -1108,6 +1178,7 @@
                         <span class="tech-tag">LLM (Gemini)</span>
                         <span class="tech-tag">PaddleOCR</span>
                     </div>
+                    <button class="learn-more-btn" onclick="openModal('project2Modal')">Learn More</button>
                 </div>
                 <div class="project-card">
                     <h3>Traffic Management – Live Insights</h3>
@@ -1118,6 +1189,7 @@
                         <span class="tech-tag">Jupyter Notebook</span>
                         <span class="tech-tag">Raspberry Pi</span>
                     </div>
+                    <button class="learn-more-btn" onclick="openModal('project3Modal')">Learn More</button>
                 </div>
             </div>
         </div>
@@ -1187,15 +1259,15 @@
                             and collaborations in AI and machine learning. Feel free to reach out!
                         </p>
                     </div>
-                    <a href="mailto:vbarunika278@gmail.com" class="contact-item">
+                    <a href="mailto:varunika278@gmail.com" class="contact-item">
                         <div class="contact-icon contact-icon-blue">📧</div>
                         <span>varunika278@gmail.com</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/varunika-sivakumar/" class="contact-item" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/varunika-sivakumar/" class="contact-item">
                         <div class="contact-icon contact-icon-indigo">💼</div>
                         <span>LinkedIn Profile</span>
                     </a>
-                    <a href="https://github.com/varunika278" class="contact-item" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/varunika278" class="contact-item">
                         <div class="contact-icon contact-icon-gray">👨‍💻</div>
                         <span>GitHub Profile</span>
                     </a>
@@ -1204,12 +1276,170 @@
         </div>
     </section>
 
+    <!-- Project Modals -->
+    <!-- Project 1 Modal -->
+    <div id="project1Modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Accident Verification and Insurance Fraud Mitigation System</h2>
+                <button class="close-btn" onclick="closeModal('project1Modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Project Overview</h4>
+                <p>This comprehensive system addresses two critical challenges in the automotive insurance industry: real-time accident prevention and insurance fraud detection. The project combines IoT sensors, computer vision, and AI agents to create a holistic solution for driver safety and claim verification.</p>
+                
+                <h4>Key Features</h4>
+                <ul>
+                    <li><strong>Real-time Driver Monitoring:</strong> Advanced computer vision algorithms monitor driver behavior for signs of drowsiness, distraction, and impairment</li>
+                    <li><strong>Multi-sensor Integration:</strong> Alcohol detection sensors, GPS tracking, and obstacle detection systems work in harmony</li>
+                    <li><strong>Intelligent Alert System:</strong> Multi-level warning system with progressive alerts and emergency protocols</li>
+                    <li><strong>AI-powered Claim Validation:</strong> LLM-based agents analyze accident data to detect potential insurance fraud</li>
+                    <li><strong>Real-time Data Processing:</strong> Edge computing capabilities for immediate response and cloud integration for comprehensive analysis</li>
+                </ul>
+
+                <h4>Technical Implementation</h4>
+                <p>The system leverages deep learning models for computer vision tasks, including facial landmark detection for drowsiness monitoring and object detection for obstacle identification. Arduino-based sensor networks collect real-time data, which is processed through Python-based ML pipelines. The intelligent agent system uses large language models to analyze claim patterns and identify suspicious activities.</p>
+
+                <h4>Technology Stack</h4>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">Deep Learning</span>
+                    <span class="modal-tech-tag">Computer Vision</span>
+                    <span class="modal-tech-tag">Python</span>
+                    <span class="modal-tech-tag">OpenCV</span>
+                    <span class="modal-tech-tag">TensorFlow</span>
+                    <span class="modal-tech-tag">Arduino</span>
+                    <span class="modal-tech-tag">IoT Sensors</span>
+                    <span class="modal-tech-tag">MySQL</span>
+                    <span class="modal-tech-tag">GPS Tracking</span>
+                    <span class="modal-tech-tag">LLM Integration</span>
+                    <span class="modal-tech-tag">Real-time Processing</span>
+                </div>
+
+                <h4>Impact & Results</h4>
+                <p>This system demonstrates significant potential for reducing road accidents through proactive monitoring and substantially decreasing insurance fraud through intelligent claim analysis. The multi-modal approach ensures comprehensive coverage of safety scenarios while maintaining high accuracy in fraud detection.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Modal -->
+    <div id="project2Modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Bank Statement Aggregation System</h2>
+                <button class="close-btn" onclick="closeModal('project2Modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Project Overview</h4>
+                <p>This advanced document processing system revolutionizes how financial institutions handle scanned bank statements. By combining state-of-the-art OCR technology with AI-driven data processing agents, the system transforms unstructured document images into structured, searchable, and actionable financial data.</p>
+                
+                <h4>Key Features</h4>
+                <ul>
+                    <li><strong>Advanced OCR Processing:</strong> PaddleOCR implementation with custom preprocessing for enhanced text extraction accuracy</li>
+                    <li><strong>Intelligent Data Parsing:</strong> AI agents identify and extract key financial information including transactions, balances, and account details</li>
+                    <li><strong>Data Cleaning & Validation:</strong> Automated data quality checks and correction mechanisms</li>
+                    <li><strong>Structured Output Generation:</strong> Conversion to standardized formats for seamless integration with existing systems</li>
+                    <li><strong>Scalable Processing Pipeline:</strong> Batch processing capabilities for high-volume document handling</li>
+                    <li><strong>Quality Assurance:</strong> Multi-layer validation to ensure data accuracy and completeness</li>
+                </ul>
+
+                <h4>Technical Architecture</h4>
+                <p>The system employs a multi-stage pipeline beginning with document preprocessing and OCR extraction using PaddleOCR. Advanced NLP techniques and machine learning models parse the extracted text to identify financial entities. AI agents powered by Gemini LLM perform intelligent data structuring and validation, while MySQL databases ensure efficient storage and retrieval.</p>
+
+                <h4>Technology Stack</h4>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">PaddleOCR</span>
+                    <span class="modal-tech-tag">Computer Vision</span>
+                    <span class="modal-tech-tag">Python</span>
+                    <span class="modal-tech-tag">OpenCV</span>
+                    <span class="modal-tech-tag">Natural Language Processing</span>
+                    <span class="modal-tech-tag">Gemini LLM</span>
+                    <span class="modal-tech-tag">MySQL</span>
+                    <span class="modal-tech-tag">Data Pipeline</span>
+                    <span class="modal-tech-tag">Document Processing</span>
+                    <span class="modal-tech-tag">API Development</span>
+                    <span class="modal-tech-tag">Data Validation</span>
+                </div>
+
+                <h4>Business Impact</h4>
+                <p>This solution significantly reduces manual data entry time by over 90%, improves data accuracy through automated validation, and enables real-time processing of financial documents. The system supports compliance requirements and provides audit trails for regulatory purposes, making it invaluable for financial institutions handling large volumes of bank statements.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 Modal -->
+    <div id="project3Modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Traffic Management – Live Insights</h2>
+                <button class="close-btn" onclick="closeModal('project3Modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4>Project Overview</h4>
+                <p>This intelligent traffic monitoring system represents the next generation of smart city infrastructure. By combining edge computing with advanced computer vision, the system provides real-time traffic analysis, incident detection, and automated alert generation for urban traffic management authorities.</p>
+                
+                <h4>Key Features</h4>
+                <ul>
+                    <li><strong>Real-time Video Analysis:</strong> Continuous processing of live traffic feeds using optimized computer vision algorithms</li>
+                    <li><strong>Multi-object Detection:</strong> Simultaneous tracking of vehicles, pedestrians, and traffic violations</li>
+                    <li><strong>Incident Classification:</strong> Automated categorization of traffic events by type and severity</li>
+                    <li><strong>Smart Alert System:</strong> Priority-based notification system for traffic management centers</li>
+                    <li><strong>Edge Computing:</strong> Raspberry Pi-based processing for low-latency response</li>
+                    <li><strong>Traffic Flow Analytics:</strong> Comprehensive analysis of traffic patterns and congestion metrics</li>
+                    <li><strong>Integration Ready:</strong> API endpoints for integration with existing traffic management systems</li>
+                </ul>
+
+                <h4>Technical Implementation</h4>
+                <p>The system utilizes YOLO-based object detection models optimized for edge deployment on Raspberry Pi hardware. Custom deep learning models trained on traffic-specific datasets ensure high accuracy in vehicle detection and traffic event classification. The system processes video streams in real-time, applying computer vision techniques for motion tracking, collision detection, and traffic violation identification.</p>
+
+                <h4>Technology Stack</h4>
+                <div class="modal-tech-stack">
+                    <span class="modal-tech-tag">YOLO Object Detection</span>
+                    <span class="modal-tech-tag">Computer Vision</span>
+                    <span class="modal-tech-tag">Raspberry Pi</span>
+                    <span class="modal-tech-tag">Python</span>
+                    <span class="modal-tech-tag">OpenCV</span>
+                    <span class="modal-tech-tag">TensorFlow Lite</span>
+                    <span class="modal-tech-tag">Edge Computing</span>
+                    <span class="modal-tech-tag">Real-time Processing</span>
+                    <span class="modal-tech-tag">Jupyter Notebook</span>
+                    <span class="modal-tech-tag">Video Analytics</span>
+                    <span class="modal-tech-tag">IoT Integration</span>
+                </div>
+
+                <h4>Smart City Impact</h4>
+                <p>This solution enables proactive traffic management by providing real-time insights into traffic conditions and immediate alerts for incidents. The system reduces response times for traffic accidents, optimizes traffic flow through data-driven insights, and contributes to overall urban safety and efficiency. The edge-based architecture ensures reliable operation even with limited connectivity, making it ideal for comprehensive city-wide deployment.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile menu toggle
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             mobileMenu.classList.toggle('active');
         }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                const modal = event.target;
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1245,13 +1475,6 @@
                 }
             });
         });
-
-        // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            event.target.reset();
-        }
 
         // Initialize active section on load
         document.addEventListener('DOMContentLoaded', () => {
